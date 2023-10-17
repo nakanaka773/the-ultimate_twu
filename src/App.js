@@ -118,8 +118,8 @@ const Todo = () => {
       
 
       {users.map((user) => (
-        <div key={user.id} className='mt-12 mx-20 px-8  bg-white'>
-          <div className='flex justify-center mt-8 pt-12 text-2xl font-extrabold'>
+        <div key={user.id} className='mt-12 md:mx-20 px-8  bg-white'>
+          <div className='flex justify-center mt-8 pt-12 md:text-2xl md:font-extrabold'>
             <div className='flex justify-center items-center bg-leftcolor h-16 w-96 text-white mx-4'>
               <h1>{user.lefttitle}</h1>
             </div>
@@ -129,12 +129,12 @@ const Todo = () => {
             </div>
           </div>
           <div className='flex justify-center mt-4 items-center'>
-            <button className='text-white bg-leftcolor text-2xl font-extrabold p-4 h-16 rounded-md' onClick={() => incrementleftCount(user.id)}>投票する</button>
-            <PieChart width={400} height={400} >
+            <button className='text-white bg-leftcolor md:text-2xl md:font-extrabold p-4 md:h-16 rounded-md ' onClick={() => incrementleftCount(user.id)}>投票する</button>
+            <PieChart width={250} height={250} >
               <Pie
                 data={[{ value: user.leftcount, label: "1つ目" }, { value: user.rightcount, label: "2" }]}
-                cx={200}
-                cy={200}
+                cx={120}
+                cy={120}
                 labelLine={false}
                 label={renderCustomizedLabel}
                 outerRadius={80}
@@ -148,7 +148,7 @@ const Todo = () => {
                 <Cell fill='#FF2727'></Cell>
               </Pie>
             </PieChart>
-            <button onClick={() => incrementrightCount(user.id)} className='text-white bg-rightcolor text-2xl font-extrabold p-4 h-16 rounded-md'>投票する</button>
+            <button onClick={() => incrementrightCount(user.id)} className='text-white bg-rightcolor md:text-2xl md:font-extrabold p-4 md:h-16  rounded-md ml--4'>投票する</button>
           </div>
 
 
