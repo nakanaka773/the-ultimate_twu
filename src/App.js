@@ -105,14 +105,13 @@ const Todo = () => {
       {user && 
         <form onSubmit={handleSubmit} >
         <div className="flex justify-center items-center mt-12">
-        <input type="text" name='lefttitle' className='w-64 h-12 rounded-md ' />
+        <input type="text" name='lefttitle' className='md:w-64 w-32 h-12 rounded-md ' />
         <label className='mx-8'>VS</label>
-        <input type="text" name='righttitle' className='w-64 h-12 rounded-md  ' />
+        <input type="text" name='righttitle' className='md:w-64 w-32 h-12 rounded-md  ' />
         </div>
         <div className="flex justify-center items-center mt-8">
-        <Button >お題を出す</Button>
+        <button className='block bg-sky-500 text-white p-2 rounded-md' >お題を出す</button>
         </div>
-        
       </form>
       }
       
