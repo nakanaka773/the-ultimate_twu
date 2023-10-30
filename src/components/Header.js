@@ -7,10 +7,7 @@ import { auth} from './../firebase'
 import { useAuthState } from "react-firebase-hooks/auth";
 import SignIn from './SignIn';
 import SignOut from './SignOut';
-import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+
 
 export default function MenuAppBar() {
   const [user] = useAuthState(auth);
@@ -18,7 +15,7 @@ export default function MenuAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ color: "#e0f2f1", backgroundColor: "#01579b" }}>
         <Toolbar>
-          <Typography className='flex justify-center text-3xl' variant="h4" component="div" sx={{ flexGrow: 1 }}>
+          <Typography className='text-3xl' variant="h4" component="div" sx={{ flexGrow: 1 }}>
             究極の二択
           </Typography>
           {user ? <SignOut />:<SignIn />}

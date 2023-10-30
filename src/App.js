@@ -5,10 +5,10 @@ import React, { useEffect, useState } from 'react'
 import { PieChart, Pie, Cell } from "recharts";
 import Header from './components/Header'
 import './output.css'
-import SignIn from './components/SignIn';
 import { auth} from './firebase'
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Button } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 
 
 const RADIAN = Math.PI / 180;
@@ -19,7 +19,7 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-  index
+  index,
 }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -75,9 +75,8 @@ const Todo = () => {
     const userDocumentRef = doc(db, 'users', id);
     const userSnapshot = await getDoc(userDocumentRef);
     const userData = userSnapshot.data();
-    const leftcount = userData.leftcount || 0; // Default to 0 if count doesn't exist
+    const leftcount = userData.leftcount || 0;
 
-    // Update the count
     await updateDoc(userDocumentRef, {
       leftcount: leftcount + 1,
     });
@@ -105,20 +104,20 @@ const Todo = () => {
       {user && 
         <form onSubmit={handleSubmit} >
         <div className="flex justify-center items-center mt-12">
-        <input type="text" name='lefttitle' className='md:w-64 w-32 h-12 rounded-md ' />
+        <input type="text" required name='lefttitle' className='md:w-64 w-32 h-12 rounded-md ' />
         <label className='mx-8'>VS</label>
-        <input type="text" name='righttitle' className='md:w-64 w-32 h-12 rounded-md  ' />
+        <input type="text" required name='righttitle' className='md:w-64 w-32 h-12 rounded-md  ' />
         </div>
         <div className="flex justify-center items-center mt-8">
         <button className='block bg-sky-500 text-white p-2 rounded-md' >お題を出す</button>
         </div>
       </form>
       }
-      
 
       {users.map((user) => (
         <div key={user.id} className='mt-12 md:mx-20 px-8  bg-white'>
-          <div className='flex justify-center mt-8 pt-12 md:text-2xl md:font-extrabold'>
+        <button onClick={() => deleteUser(user.id)} className='float-right mt-4 text-sky-500'><DeleteForeverIcon /></button>
+          <div className='flex justify-center pt-12 md:text-2xl md:font-extrabold'>
             <div className='flex justify-center items-center bg-leftcolor h-16 w-96 text-white mx-4'>
               <h1>{user.lefttitle}</h1>
             </div>
@@ -127,6 +126,7 @@ const Todo = () => {
               <h1>{user.righttitle}</h1>
             </div>
           </div>
+          
           <div className='flex justify-center mt-4 items-center'>
             <button className='text-white bg-leftcolor md:text-2xl md:font-extrabold p-4 md:h-16 rounded-md ' onClick={() => incrementleftCount(user.id)}>投票する</button>
             <PieChart width={250} height={250} >
