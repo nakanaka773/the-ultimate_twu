@@ -41,7 +41,7 @@ const renderCustomizedLabel = ({
 
 const Todo = () => {
   const [users, setUsers] = useState([]);
-  const [user] = useAuthState(auth);
+  const [userAuth] = useAuthState(auth);
 
   useEffect(() => {
     const usersCollectionRef = collection(db, 'users');
@@ -101,7 +101,7 @@ const Todo = () => {
   return (
     <div className='pb-12 p-0 bg-gray-100'>
       <Header />
-      {user && 
+      {userAuth && 
         <form onSubmit={handleSubmit} >
         <div className="flex justify-center items-center mt-12">
         <input type="text" required name='lefttitle' className='md:w-64 w-32 h-12 rounded-md ' />
@@ -116,7 +116,7 @@ const Todo = () => {
 
       {users.map((user) => (
         <div key={user.id} className='mt-12 md:mx-20 px-8  bg-white'>
-        <button onClick={() => deleteUser(user.id)} className='float-right mt-4 text-sky-500'><DeleteForeverIcon /></button>
+        {userAuth && <button onClick={() => deleteUser(user.id)} className='float-right mt-4 text-sky-500'><DeleteForeverIcon /></button>}
           <div className='flex justify-center pt-12 md:text-2xl md:font-extrabold'>
             <div className='flex justify-center items-center bg-leftcolor h-16 w-96 text-white mx-4'>
               <h1>{user.lefttitle}</h1>
